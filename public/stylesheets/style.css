@@ -90,3 +90,11 @@
   z-index: 10;
   padding: 4px 7px 8px 7px;
 }
+
+/*
+    ORDER
+*/
+.order-navigation{
+    z-index: 10;
+}
+

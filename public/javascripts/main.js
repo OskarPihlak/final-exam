@@ -12,5 +12,8 @@ function toggleSignUp(){
 function moreThings(){
     i++;
     console.log('Something more happened ' + i + ' times');
-
+}
+function nextSectionOfOrder(data){
+    console.log('.'+data);
+    document.querySelector('.'+data + '_tab').classList.remove('disabled');
 }
