@@ -3,42 +3,105 @@
         <div class="nav-wrapper blue-grey darken-4">
             <a href="#" class="brand-logo logo"><img class='logo' src="/images/logo/logo.svg"></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <div class="input-field col s12 m6">
+                        <select class="icons">
+                            <option value="" disabled selected>asd</option>
+                            <option value="" data-icon="images/flags/estonia.png" class="left">Estonian</option>
+                            <option value="" data-icon="images/flags/united-kingdom.png" class="left">English</option>
+                        </select>
+                        <label>Choose a language</label>
+                    </div>
+                </li>
                 <li><a target="_blank">Sass</a></li>
                 <li><a target="_blank">Components</a></li>
                 <li><a target="_blank">JavaScript</a></li>
-                <!-- Dropdown Trigger -->
-                <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
-
-                <!-- Dropdown Structure -->
-                <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#!">one</a></li>
-                    <li><a href="#!">two</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#!">three</a></li>
-                </ul>
             </ul>
         </div>
     </nav>
-
     <div class="slider">
         <ul class="slides">
             {{#each breadPictures}}
                 <li>
                     <img src="/images/food/{{this.picture}}" alt="">
                     <div class="caption {{this.position}}">
-                        <h3>This is our tagline</h3>
-                        <h5 class="light grey-text text-lighten-3">Here is our slogan</h5>
+                        <h3>{{this.tagline}}</h3>
+                        <h5 class="light grey-text text-lighten-3">{{this.slogan}}</h5>
                     </div>
                 </li>
             {{/each}}
         </ul>
     </div>
+        <button class="btn waves-effect waves-light btn-order" onclick="toggleOrderingMenu()">Telli siit!</button>
+    <div class="ordering ">
+        <nav>
+            <div class="nav-wrapper blue-grey darken-4">
+                <div class="col s12">
+                    <a href="#2" class="breadcrumb">Vali põhi</a>
+                    <a href="#" class="breadcrumb">Vali liha</a>
+                    <a href="#" class="breadcrumb">Vali juust</a>
+                    <a href="#" class="breadcrumb">Vali värske täidis</a>
+                    <a href="#" class="breadcrumb">Vali kaste</a>
+                    <a href="#" class="breadcrumb">Kus sööd?</a>
+                </div>
+            </div>
+        </nav>
+        <div>
 
-
+        </div>
+    </div>
+    <footer class="page-footer blue-grey darken-4">
+        <div class="container">
+            <div class="row footer-margin-adjustment">
+                <div class="col l6 s12">
+                    <h5 class="text-contacts">Kontakt</h5>
+                    <ul class="text-contacts">
+                        {{#each contactInformation}}
+                            <li>
+                                <i class="material-icons">{{this.icon}}</i><span>{{this.content}}</span>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="col l6 offset-4 s12">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <p class="text-copyright">© 2018 Oskar Pihlak</p>
+                <div class="social-media-icons ">
+                    {{#each socialMediaIcons}}
+                        <i class="{{this}} icon-size"></i>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 
 <script>
     // Init Slider
     $('.slider').slider();
 
+    //init select
+    $(document).ready(function () {
+        $('select').material_select();
+    });
 </script>
+<script>
+// Initialize and add the map
+function initMap() {
+// The location of Uluru
+var uluru = {lat: 49.189296, lng: 16.600953};
+// The map, centered at Uluru
+var map = new google.maps.Map(
+document.getElementById('map'), {zoom: 16, center: uluru});
+// The marker, positioned at Uluru
+var marker = new google.maps.Marker({position: uluru, map: map});
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo7uom7YHA8Bax88nKKE5zW2k7GfnAEnQ&callback=initMap">
+</script>
+<div class="" style="height: 500px"></div>

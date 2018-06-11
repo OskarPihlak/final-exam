@@ -2,3 +2,57 @@
   padding: 5px;
 }
 
+.btn-order{
+  transform: translateX(-50%);
+  margin: 5px 0 5px 50%;
+}
+.text-copyright{
+  margin: 5px;
+  display: inline-block;
+}
+.text-contacts{
+  color: #b9b9b9;
+}
+.text-social-media{
+  display: inline-block;
+  margin: 0;
+}
+
+.footer-margin-adjustment{
+  margin-bottom: 0;
+}
+#map {
+  height: 140px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+}
+/*
+    ICONS
+*/
+.social-media-icons{
+  display: inline-block;
+  float: right;
+}
+
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+.fa-facebook:hover{
+  color: #3B5998;
+  transition: 1s;
+}
+.fa-twitter:hover{
+  color: #00aced;
+  transition: 1s;
+}
+.fa-youtube:hover{
+  color: #cc181e;
+  transition: 1s;
+}
+.fa-instagram:hover{
+  color:  #e95950;
+  transition: 1s;
+}
+.icon-size{
+  font-size: 27px;
+}

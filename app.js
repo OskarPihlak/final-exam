@@ -14,6 +14,9 @@ const hbs = require('express-handlebars');
 * */
 const indexRouter = require('./routes/main_page');
 const usersRouter = require('./routes/users');
+/*
+* Other files
+* */
 
 /*
 * App init
