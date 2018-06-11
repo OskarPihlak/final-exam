@@ -1,19 +1,31 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+/*
+* NPM packages used
+* */
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const hbs = require('express-handlebars');
 
-var app = express();
+/*
+* Routing variables
+* */
+const indexRouter = require('./routes/main_page');
+const usersRouter = require('./routes/users');
+
+/*
+* App init
+* */
+const app = express();
 
 mongoose.connect('mongodb://exam_client:WorkDragon88@ds159880.mlab.com:59880/exam');
-
 console.log(mongoose.connection);
 
+
 // view engine setup
+app.engine('hbs',hbs({extname:'hbs', defaultLayout:'template'}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -23,6 +35,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
+* Routing usages
+* */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

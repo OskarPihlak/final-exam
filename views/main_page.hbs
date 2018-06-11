@@ -1,0 +1,44 @@
+<div class="container">
+    <nav>
+        <div class="nav-wrapper blue-grey darken-4">
+            <a href="#" class="brand-logo logo"><img class='logo' src="/images/logo/logo.svg"></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a target="_blank">Sass</a></li>
+                <li><a target="_blank">Components</a></li>
+                <li><a target="_blank">JavaScript</a></li>
+                <!-- Dropdown Trigger -->
+                <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+
+                <!-- Dropdown Structure -->
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!">three</a></li>
+                </ul>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="slider">
+        <ul class="slides">
+            {{#each breadPictures}}
+                <li>
+                    <img src="/images/food/{{this.picture}}" alt="">
+                    <div class="caption {{this.position}}">
+                        <h3>This is our tagline</h3>
+                        <h5 class="light grey-text text-lighten-3">Here is our slogan</h5>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+
+
+</div>
+
+<script>
+    // Init Slider
+    $('.slider').slider();
+
+</script>
