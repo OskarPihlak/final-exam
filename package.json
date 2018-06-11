@@ -1,6 +1,6 @@
 {
   "name": "l-pueksam",
-  "author":"Oskar Pihlak",
+  "author": "Oskar Pihlak",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "nodemon": "^1.17.5",
-    "ip": "^1.1.5"
+    "ip": "^1.1.5",
+    "mongoose": "^5.1.4"
   }
 }
