@@ -6,19 +6,35 @@
                 <li>
                     <div class="input-field col s12 m6">
                         <select class="icons">
-                            <option value="" disabled selected>asd</option>
-                            <option value="" data-icon="images/flags/estonia.png" class="left">Estonian</option>
-                            <option value="" data-icon="images/flags/united-kingdom.png" class="left">English</option>
+                            <option value="" disabled selected>Language option</option>
+                            <option value="EST" data-icon="images/flags/estonia.png" class="left">Estonian</option>
+                            <option value="ENG" data-icon="images/flags/united-kingdom.png" class="left">English</option>
                         </select>
-                        <label>Choose a language</label>
+                       <!-- <label>Choose a language</label>-->
                     </div>
                 </li>
-                <li><a target="_blank">Sass</a></li>
-                <li><a target="_blank">Components</a></li>
-                <li><a target="_blank">JavaScript</a></li>
+                <li><a target="_blank" onclick="toggleLogin()">Login</a></li>
+                <li><a target="_blank" onclick="toggleSignUp()">Sign up</a></li>
+                <li><a target="_blank" onclick="moreThings()">More</a></li>
             </ul>
         </div>
     </nav>
+    <!-- log in-->
+    <form class="login-form blue-grey darken-2 hiddendiv">
+        <i onclick="toggleLogin()" class="material-icons red btn-close">close</i>
+        <input placeholder="Username" type="text" required="">
+        <input placeholder="Password" type="password" required="">
+        <button class="btn waves-effect waves-light btn-login">Log in</button>
+    </form>
+    <!-- signup-->
+    <form class="signup-form blue-grey darken-2 hiddendiv">
+        <i onclick="toggleSignUp()" class="material-icons red btn-close">close</i>
+        <input placeholder="Email" type="email" required="">
+        <input placeholder="Username" type="text" required="">
+        <input placeholder="Password" type="password" required="">
+        <input placeholder="Confirm password" type="password" required="">
+        <button class="btn waves-effect waves-light btn-signup">Sign up</button>
+    </form>
     <div class="slider">
         <ul class="slides">
             {{#each breadPictures}}
