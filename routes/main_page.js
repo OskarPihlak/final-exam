@@ -1,5 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser =           require('body-parser');
+const urlEncodedParser =     bodyParser.urlencoded({extended: false});
+const moment = require('moment');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../schemas/users');
+
+
+//Bring in Models
+let Orders = require('../schemas/orders');
 
 /*
 * Main page routes
@@ -47,6 +57,7 @@ const orderingInformation = [{step:'Vali põhi',           id:'choose_base',   n
                                     {property:'Sulas',price:3, style:''}]}
                              ];
 router.get('/', (req, res) => {
+    Orders.find({}, (err, orders)=>{if(err){err} else {console.log(orders);}});
   res.render('main_page', {
       breadPictures: breadPictures,
       contactInformation: contactInformation,
@@ -54,5 +65,75 @@ router.get('/', (req, res) => {
       orderingInformation:orderingInformation
   });
 });
+router.post('/post/order',urlEncodedParser ,(req,res)=>{
+    let order = new Orders();
+   order.base = req.body.base;
+   order.meat = req.body.meat;
+   order.cheese = req.body.cheese;
+   order.fresh = req.body.fresh;
+   order.sauce = req.body.sauce;
+   order.paymentMethod = req.body.paymentMethod;
+   order.dateOrdered = moment();
 
+   order.save((err)=>{
+       if(err){
+           console.log(err);
+           return;
+       } else {
+           res.redirect('/');
+       }
+   })
+});
+router.post('/register', function (req, res) {
+    const name = req.body.name;
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    const password2 = req.body.password2;
+
+    // Validation
+    req.checkBody('name', 'Name is required').notEmpty();
+    req.checkBody('email', 'Email is required').notEmpty();
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('username', 'Username is required').notEmpty();
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+    const errors = req.validationErrors();
+
+    if (errors) {
+       console.log(errors);
+    }
+    else {
+        //checking for email and username are already taken
+        User.findOne({ username: {
+                "$regex": "^" + username + "\\b", "$options": "i"
+            }}, function (err, user) {
+            User.findOne({ email: {
+                    "$regex": "^" + email + "\\b", "$options": "i"
+                }}, function (err, mail) {
+                if (user || mail) {
+                    res.send({
+                        user: user,
+                        mail: mail
+                    });
+                }
+                else {
+                    const newUser = new User({
+                        name: name,
+                        email: email,
+                        username: username,
+                        password: password,
+                        admin:false
+                    });
+                    User.createUser(newUser, function (err, user) {
+                        if (err) throw err;
+                        console.log(user);
+                    });
+                    res.redirect('/');
+                }
+            });
+        });
+    }
+});
 module.exports = router;

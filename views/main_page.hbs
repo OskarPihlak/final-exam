@@ -28,12 +28,13 @@
         <button class="btn waves-effect waves-light btn-login">Logi sisse</button>
     </form>
     <!-- signup-->
-    <form class="signup-form blue-grey darken-2 hiddendiv">
+    <form method="post" action='/register' class="signup-form blue-grey darken-2 hiddendiv">
         <i onclick="toggleSignUp()" class="material-icons red btn-close">close</i>
-        <input placeholder="Email" type="email" required="">
-        <input placeholder="Username" type="text" required="">
-        <input placeholder="Password" type="password" required="">
-        <input placeholder="Confirm password" type="password" required="">
+        <input placeholder="Email" type="email" required="" name="email">
+        <input placeholder="Username" type="text" required="" name="username">
+        <input placeholder="Name" type="text" required="" name="name">
+        <input placeholder="Password" type="password" required="" name="password">
+        <input placeholder="Confirm password" type="password" required="" name="password2">
         <button class="btn waves-effect waves-light btn-signup">Registreeru </button>
     </form>
     <div class="slider">
@@ -62,6 +63,7 @@
                     <li class="tab choose_sauce_tab   col s3 disabled"><a class="choose_sauce_a" href="#choose_sauce">Vali kaste<i class="material-icons">navigate_next</i></a></li>
                     <li class="tab choose_place_tab   col s3 disabled"><a class="choose_place_a" href="#choose_place">Vali koht, kus süüa<i class="material-icons">navigate_next</i></a></li>
                     <li class="tab choose_payment_method_tab col s3 disabled"><a class="choose_payment_method_a" href="#choose_payment_method">Vali makseviis</a></li>
+                    <li class="tab paymentConfirm_tab col s3 disabled"><a class="paymentConfirm_a" href="#paymentConfirm">CTA</a></li>
                 </ul>
             </div>
         </div>
@@ -73,7 +75,7 @@
                 </div>
                 <div class="card-content" style="overflow: visible">
                     <div class="input-field col s12" >
-                        <select>
+                        <select id="{{this.id}}" onchange="onOrderChange({{this.id}})">
                             {{#each this.data}}
                                 <option value="{{this.price}}" {{this.style}}>{{this.property}}</option>
                             {{/each}}
@@ -87,6 +89,27 @@
                 </div>
             </div>
         {{/each}}
+        <div id="paymentConfirm">
+            <form method="post" action="/post/order">
+                <label for="base-in">Põhi</label>
+                <input id="base-in" class="collection-item base-info" name="base" readonly>
+                <label for="meat-in">Liha</label>
+                <input id="meat-in" class="collection-item meat-info" name="meat" readonly>
+                <label for="cheese-in">Juust</label>
+                <input id="cheese-in" class="collection-item cheese-info" name="cheese" readonly>
+                <label for="fresh-in">Värske kraam</label>
+                <input id="fresh-in" class="collection-item fresh-info" name="fresh" readonly>
+                <label for="sauce-in">Kaste</label>
+                <input id="sauce-in" class="collection-item sauce-info" name="sauce" readonly>
+                <label for="place-in">Asukoht</label>
+                <input id="place-in" class="collection-item place-info" name="place" readonly>
+                <label for="payment-in">Maksmisviis</label>
+                <input id="payment-in" class="collection-item payment-info" name="payment-info" readonly>
+                <button class="btn" type="submit">Kinnita</button>
+            </form>
+
+        </div>
+
     </div>
 
     <footer class="page-footer blue-grey darken-4">
@@ -130,21 +153,31 @@
         $('ul.tabs').tabs();
         $(".btn-choose_base").click(function () {
             $('ul.tabs').tabs('select_tab', 'choose_meat');
+            document.querySelector('#base-in').value = document.querySelector(`#choose_base > div.card-content > div > div > input`).value;
         });
         $(".btn-choose_meat").click(function () {
             $('ul.tabs').tabs('select_tab', 'choose_cheese');
+            document.querySelector('#meat-in').value = document.querySelector(`#choose_meat > div.card-content > div > div > input`).value;
         });
         $(".btn-choose_cheese").click(function () {
             $('ul.tabs').tabs('select_tab', 'choose_fresh');
+            document.querySelector('#cheese-in').value = document.querySelector(`#choose_cheese > div.card-content > div > div > input`).value;
         });
         $(".btn-choose_fresh").click(function () {
             $('ul.tabs').tabs('select_tab', 'choose_sauce');
+            document.querySelector('#fresh-in').value = document.querySelector(`#choose_fresh > div.card-content > div > div > input`).value;
         });
         $(".btn-choose_sauce").click(function () {
             $('ul.tabs').tabs('select_tab', 'choose_place');
+            document.querySelector('#sauce-in').value = document.querySelector(`#choose_sauce > div.card-content > div > div > input`).value;
         });
         $(".btn-choose_place").click(function () {
             $('ul.tabs').tabs('select_tab', 'choose_payment_method');
+            document.querySelector('#place-in').value = document.querySelector(`#choose_place > div.card-content > div > div > input`).value;
+        });
+        $(".btn-choose_payment_method").click(function () {
+            $('ul.tabs').tabs('select_tab', 'paymentConfirm');
+            document.querySelector('#payment-in').value = document.querySelector(`#choose_payment_method > div.card-content > div > div > input`).value;
         });
     });
 

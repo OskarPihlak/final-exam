@@ -13,12 +13,17 @@ function moreThings(){
     i++;
     console.log('Something more happened ' + i + ' times');
 }
-function nextSectionOfOrder(data, element) {
-    console.log('.' + data);
+function nextSectionOfOrder(next, element) {
+    console.log('.' + next);
     console.log(element);
-    document.querySelector('.' + data + '_tab').classList.remove('disabled');
+    document.querySelector('.' + next + '_tab').classList.remove('disabled');
     document.querySelector('.' + element + '_a').setAttribute("style", "color:#009688 !important;'");
     document.querySelector(".btn-"+element).click(function() {
-        $('ul.tabs').tabs('select_tab', data);
+        $('ul.tabs').tabs('select_tab', next);
     });
+}
+function onOrderChange(selection) {
+    console.log(selection[0].id);
+    const values = document.querySelector(`#${selection[0].id} > div.card-content > div > div > input`).value;
+   // console.log(values);
 }
