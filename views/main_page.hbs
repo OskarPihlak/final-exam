@@ -6,17 +6,17 @@
                 <li>
                     <div class="input-field col s12 m6">
                         <select class="icons">
-                            <option value="" disabled selected>Language option</option>
-                            <option value="EST" data-icon="images/flags/estonia.png" class="left">Estonian</option>
-                            <option value="ENG" data-icon="images/flags/united-kingdom.png" class="left">English
+                            <option value="" disabled selected>Keele valik</option>
+                            <option value="EST" data-icon="images/flags/estonia.png" class="left">Eesti</option>
+                            <option value="ENG" data-icon="images/flags/united-kingdom.png" class="left">Inglise
                             </option>
                         </select>
                         <!-- <label>Choose a language</label>-->
                     </div>
                 </li>
-                <li><a target="_blank" onclick="toggleLogin()">Login</a></li>
-                <li><a target="_blank" onclick="toggleSignUp()">Sign up</a></li>
-                <li><a target="_blank" onclick="moreThings()">More</a></li>
+                <li><a target="_blank" onclick="toggleLogin()">Logi sisse</a></li>
+                <li><a target="_blank" onclick="toggleSignUp()">Registreeru</a></li>
+                <li><a target="_blank" onclick="moreThings()">Veel</a></li>
             </ul>
         </div>
     </nav>
@@ -25,7 +25,7 @@
         <i onclick="toggleLogin()" class="material-icons red btn-close">close</i>
         <input placeholder="Username" type="text" required="">
         <input placeholder="Password" type="password" required="">
-        <button class="btn waves-effect waves-light btn-login">Log in</button>
+        <button class="btn waves-effect waves-light btn-login">Logi sisse</button>
     </form>
     <!-- signup-->
     <form class="signup-form blue-grey darken-2 hiddendiv">
@@ -34,7 +34,7 @@
         <input placeholder="Username" type="text" required="">
         <input placeholder="Password" type="password" required="">
         <input placeholder="Confirm password" type="password" required="">
-        <button class="btn waves-effect waves-light btn-signup">Sign up</button>
+        <button class="btn waves-effect waves-light btn-signup">Registreeru </button>
     </form>
     <div class="slider">
         <ul class="slides">
@@ -49,68 +49,75 @@
             {{/each}}
         </ul>
     </div>
+    <img src="/images/logo/logo.svg" style="margin: 0 0 0 50%;transform: translateX(-50%);">
     <button class="btn waves-effect waves-light btn-order" onclick="toggleOrderingMenu()">Telli siit!</button>
     <div class="ordering ">
         <div class="row">
             <div class="col s12">
                 <ul class="tabs order-navigation">
-                    <li class="tab col s3"><a class="active" href="#choose_base"><span>Vali põhi</span><i class="material-icons">navigate_next</i></a></li>
-                    <li class="tab choose_meat_tab col s3 disabled"><a href="#choose_meat">Vali liha<i class="material-icons">navigate_next</i></a></li>
-                    <li class="tab choose_cheese_tab col s3 disabled"><a href="#choose_cheese">Vali juust<i class="material-icons">navigate_next</i></a></li>
-                    <li class="tab choose_fresh_tab col s3 disabled"><a href="#choose_fresh">Vali värske täidis<i class="material-icons">navigate_next</i></a></li>
-                    <li class="tab choose_sauce_tab col s3 disabled"><a href="#choose_sauce">Vali kaste<i class="material-icons">navigate_next</i></a></li>
-                    <li class="tab choose_place_tab col s3 disabled"><a href="#choose_place">Vali koht, kus süüa<i class="material-icons">navigate_next</i></a></li>
-                    <li class="tab choose_payment_method_tab col s3 disabled"><a href="#choose_payment_method">Vali makseviis</a></li>
+                    <li class="tab choose_base_tab    col s3"><a class="active choose_base_a" href="#choose_base"><span>Vali põhi</span><i class="material-icons">navigate_next</i></a></li>
+                    <li class="tab choose_meat_tab    col s3 disabled"><a class="choose_meat_a" href="#choose_meat">Vali liha<i class="material-icons">navigate_next</i></a></li>
+                    <li class="tab choose_cheese_tab  col s3 disabled"><a class="choose_cheese_a" href="#choose_cheese">Vali juust<i class="material-icons">navigate_next</i></a></li>
+                    <li class="tab choose_fresh_tab   col s3 disabled"><a class="choose_fresh_a" href="#choose_fresh">Vali värske täidis<i class="material-icons">navigate_next</i></a></li>
+                    <li class="tab choose_sauce_tab   col s3 disabled"><a class="choose_sauce_a" href="#choose_sauce">Vali kaste<i class="material-icons">navigate_next</i></a></li>
+                    <li class="tab choose_place_tab   col s3 disabled"><a class="choose_place_a" href="#choose_place">Vali koht, kus süüa<i class="material-icons">navigate_next</i></a></li>
+                    <li class="tab choose_payment_method_tab col s3 disabled"><a class="choose_payment_method_a" href="#choose_payment_method">Vali makseviis</a></li>
                 </ul>
             </div>
         </div>
         {{#each orderingInformation}}
-            <div id="{{this.id}}" class="card small">
+            <div id="{{this.id}}" class="card large">
                 <div class="card-image">
                     <img src="/images/ordering-images/{{this.image}}">
                     <span class="card-title">{{this.step}}</span>
                 </div>
-                <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, voluptatum soluta aspernatur quod
-                        quaerat saepe accusamus ducimus dolore commodi, rem.</p>
+                <div class="card-content" style="overflow: visible">
+                    <div class="input-field col s12" >
+                        <select>
+                            {{#each this.data}}
+                                <option value="{{this.price}}" {{this.style}}>{{this.property}}</option>
+                            {{/each}}
+                        </select>
+                        <label>{{this.step}}</label>
+                    </div>
                 </div>
                 <div class="card-action">
-                    <a href="#{{this.nextId}}">  <button class="btn btn-{{this.id}}" onclick="nextSectionOfOrder('{{this.nextId}}')"><span>Next</span><i
+                    <a href="#{{this.nextId}}">  <button class="btn btn-{{this.id}}" onclick="nextSectionOfOrder('{{this.nextId}}','{{this.id}}')"><span>Next</span><i
                             class="material-icons">navigate_next</i></button></a>
                 </div>
             </div>
         {{/each}}
     </div>
-</div>
-<footer class="page-footer blue-grey darken-4">
-    <div class="container">
-        <div class="row footer-margin-adjustment">
-            <div class="col l6 s12">
-                <h5 class="text-contacts">Kontakt</h5>
-                <ul class="text-contacts">
-                    {{#each contactInformation}}
-                        <li>
-                            <i class="material-icons">{{this.icon}}</i><span>{{this.content}}</span>
-                        </li>
-                    {{/each}}
-                </ul>
-            </div>
-            <div class="col l6 offset-4 s12">
-                <div id="map"></div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
+
+    <footer class="page-footer blue-grey darken-4">
         <div class="container">
-            <p class="text-copyright">© 2018 Oskar Pihlak</p>
-            <div class="social-media-icons ">
-                {{#each socialMediaIcons}}
-                    <i class="{{this}} icon-size"></i>
-                {{/each}}
+            <div class="row footer-margin-adjustment">
+                <div class="col l6 s12">
+                    <h5 class="text-contacts">Kontakt</h5>
+                    <ul class="text-contacts">
+                        {{#each contactInformation}}
+                            <li>
+                                <i class="material-icons">{{this.icon}}</i><span>{{this.content}}</span>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="col l6 offset-4 s12">
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+        <div class="footer-copyright">
+            <div class="container">
+                <p class="text-copyright">© 2018 Oskar Pihlak</p>
+                <div class="social-media-icons ">
+                    {{#each socialMediaIcons}}
+                        <i class="{{this}} icon-size"></i>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 
 <script>
@@ -120,18 +127,38 @@
     //init select
     $(document).ready(function () {
         $('select').material_select();
+        $('ul.tabs').tabs();
+        $(".btn-choose_base").click(function () {
+            $('ul.tabs').tabs('select_tab', 'choose_meat');
+        });
+        $(".btn-choose_meat").click(function () {
+            $('ul.tabs').tabs('select_tab', 'choose_cheese');
+        });
+        $(".btn-choose_cheese").click(function () {
+            $('ul.tabs').tabs('select_tab', 'choose_fresh');
+        });
+        $(".btn-choose_fresh").click(function () {
+            $('ul.tabs').tabs('select_tab', 'choose_sauce');
+        });
+        $(".btn-choose_sauce").click(function () {
+            $('ul.tabs').tabs('select_tab', 'choose_place');
+        });
+        $(".btn-choose_place").click(function () {
+            $('ul.tabs').tabs('select_tab', 'choose_payment_method');
+        });
     });
+
 </script>
 <script>
     // Initialize and add the map
     function initMap() {
 // The location of Uluru
-        var uluru = {lat: 49.189296, lng: 16.600953};
+        const uluru = {lat: 49.189296, lng: 16.600953};
 // The map, centered at Uluru
-        var map = new google.maps.Map(
+        const map = new google.maps.Map(
                 document.getElementById('map'), {zoom: 16, center: uluru});
 // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({position: uluru, map: map});
+        const marker = new google.maps.Marker({position: uluru, map: map});
     }
 </script>
 <script async defer

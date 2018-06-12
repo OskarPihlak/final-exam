@@ -13,7 +13,12 @@ function moreThings(){
     i++;
     console.log('Something more happened ' + i + ' times');
 }
-function nextSectionOfOrder(data){
-    console.log('.'+data);
-    document.querySelector('.'+data + '_tab').classList.remove('disabled');
+function nextSectionOfOrder(data, element) {
+    console.log('.' + data);
+    console.log(element);
+    document.querySelector('.' + data + '_tab').classList.remove('disabled');
+    document.querySelector('.' + element + '_a').setAttribute("style", "color:#009688 !important;'");
+    document.querySelector(".btn-"+element).click(function() {
+        $('ul.tabs').tabs('select_tab', data);
+    });
 }
