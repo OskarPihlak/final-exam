@@ -58,13 +58,16 @@ const orderingInformation = [{step:'Vali põhi',           id:'choose_base',   n
                              ];
 router.get('/', (req, res) => {
     Orders.find({}, (err, orders)=>{if(err){err} else {console.log(orders);}});
+    console.log( res.locals);
   res.render('main_page', {
       breadPictures: breadPictures,
       contactInformation: contactInformation,
       socialMediaIcons:socialMediaIcons,
-      orderingInformation:orderingInformation
+      orderingInformation:orderingInformation,
+      user: req.user
   });
 });
+
 router.post('/post/order',urlEncodedParser ,(req,res)=>{
     let order = new Orders();
    order.base = req.body.base;
@@ -135,5 +138,48 @@ router.post('/register', function (req, res) {
             });
         });
     }
+});
+
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        User.getUserByUsername(username, function (err, user) {
+            if (err) throw err;
+            if (!user) {
+                return done(null, false, { message: 'Unknown User' });
+            }
+
+            User.comparePassword(password, user.password, function (err, isMatch) {
+                if (err) throw err;
+                if (isMatch) {
+                    return done(null, user);
+                } else {
+                    return done(null, false, { message: 'Invalid password' });
+                }
+            });
+        });
+    }));
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    User.getUserById(id, function (err, user) {
+        done(err, user);
+    });
+});
+
+router.post('/login',
+    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/', failureFlash: false }),
+    function (req, res) {
+    console.log(res);
+    console.log('You are logged in');
+        res.redirect('/');
+    });
+
+router.get('/logout', function (req, res) {
+    req.logout();
+   console.log('You are logged out');
+    res.redirect('/');
 });
 module.exports = router;

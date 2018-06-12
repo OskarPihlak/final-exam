@@ -14,17 +14,21 @@
                         <!-- <label>Choose a language</label>-->
                     </div>
                 </li>
-                <li><a target="_blank" onclick="toggleLogin()">Logi sisse</a></li>
-                <li><a target="_blank" onclick="toggleSignUp()">Registreeru</a></li>
+                {{#if user}}
+                    <li><a href="/logout">Logi Välja</a></li>
+                    {{else}}
+                    <li><a target="_blank" onclick="toggleLogin()">Logi sisse</a></li>
+                    <li><a target="_blank" onclick="toggleSignUp()">Registreeru</a></li>
+                {{/if}}
                 <li><a target="_blank" onclick="moreThings()">Veel</a></li>
             </ul>
         </div>
     </nav>
     <!-- log in-->
-    <form class="login-form blue-grey darken-2 hiddendiv">
+    <form method="post" action="/login" class="login-form blue-grey darken-2 hiddendiv">
         <i onclick="toggleLogin()" class="material-icons red btn-close">close</i>
-        <input placeholder="Username" type="text" required="">
-        <input placeholder="Password" type="password" required="">
+        <input placeholder="Username" type="text" required="" name="username">
+        <input placeholder="Password" type="password" required="" name="password">
         <button class="btn waves-effect waves-light btn-login">Logi sisse</button>
     </form>
     <!-- signup-->
