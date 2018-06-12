@@ -25,5 +25,12 @@ function nextSectionOfOrder(next, element) {
 function onOrderChange(selection) {
     console.log(selection[0].id);
     const values = document.querySelector(`#${selection[0].id} > div.card-content > div > div > input`).value;
-   // console.log(values);
+    console.log(values);
+    if(values === 'Kaasa'){
+       /* $('#choose_place').add(`
+                <label for="base-in">Põhi</label>
+                <input id="base-in" class="collection-item base-info" name="base" readonly>
+                <label for="meat-in">Liha</label>
+                <input id="meat-in" class="collection-item meat-info" name="meat" readonly>`);*/
+    }
 }
