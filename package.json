@@ -1,7 +1,7 @@
 {
   "name": "l-pueksam",
   "author": "Oskar Pihlak",
-  "version": "0.0.0",
+  "version": "0.9.2",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"

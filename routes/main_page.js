@@ -58,13 +58,14 @@ const orderingInformation = [{step:'Vali põhi',           id:'choose_base',   n
                              ];
 router.get('/', (req, res) => {
     Orders.find({}, (err, orders)=>{if(err){err} else {console.log(orders);}});
-    console.log( res.locals);
+    console.log(res.locals.user);
   res.render('main_page', {
       breadPictures: breadPictures,
       contactInformation: contactInformation,
       socialMediaIcons:socialMediaIcons,
       orderingInformation:orderingInformation,
-      user: req.user
+      user: res.locals.user
+
   });
 });
 
@@ -172,7 +173,6 @@ passport.deserializeUser(function (id, done) {
 router.post('/login',
     passport.authenticate('local', { successRedirect: '/', failureRedirect: '/', failureFlash: false }),
     function (req, res) {
-    console.log(res);
     console.log('You are logged in');
         res.redirect('/');
     });

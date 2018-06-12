@@ -7,7 +7,7 @@
                     <div class="input-field col s12 m6">
                         <select class="icons">
                             <option value="" disabled selected>Keele valik</option>
-                            <option value="EST" data-icon="images/flags/estonia.png" class="left">Eesti</option>
+                            <option selected value="EST" data-icon="images/flags/estonia.png" class="left">Eesti</option>
                             <option value="ENG" data-icon="images/flags/united-kingdom.png" class="left">Inglise
                             </option>
                         </select>
@@ -20,9 +20,15 @@
                     <li><a target="_blank" onclick="toggleLogin()">Logi sisse</a></li>
                     <li><a target="_blank" onclick="toggleSignUp()">Registreeru</a></li>
                 {{/if}}
-                <li><a target="_blank" onclick="moreThings()">Veel</a></li>
+                     <li><a target="_blank" onclick="moreThings()">Veel</a></li>
+                {{#if user}}
+                    <li>
+                        <p class="blue-grey darken-3 user-field">Tere {{user.name}}</p>
+                    </li>
+                {{/if}}
             </ul>
         </div>
+        {{account}}
     </nav>
     <!-- log in-->
     <form method="post" action="/login" class="login-form blue-grey darken-2 hiddendiv">
